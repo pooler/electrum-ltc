@@ -1,4 +1,4 @@
-from electrum_ltc.util import print_error
+from electrum_doge.util import print_error
 
 import httplib, urllib
 import socket
@@ -16,11 +16,11 @@ import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 import aes
 import base64
-from electrum_ltc import bmp, pyqrnative
-from electrum_ltc.plugins import BasePlugin
-from electrum_ltc.i18n import _
+from electrum_doge import bmp, pyqrnative
+from electrum_doge.plugins import BasePlugin
+from electrum_doge.i18n import _
 
-from electrum_ltc_gui.qt import HelpButton, EnterButton
+from electrum_doge_gui.qt import HelpButton, EnterButton
 
 class Plugin(BasePlugin):
 

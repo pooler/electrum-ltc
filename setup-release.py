@@ -1,5 +1,5 @@
 """
-py2app/py2exe build script for Electrum Litecoin
+py2app/py2exe build script for Electrum Dogecoin
 
 Usage (Mac OS X):
      python setup.py py2app
@@ -18,8 +18,8 @@ from lib.util import print_error
 from lib.version import ELECTRUM_VERSION as version
 
 
-name = "Electrum-LTC"
-mainscript = 'electrum-ltc'
+name = "Electrum-Doge"
+mainscript = 'electrum-doge'
 
 if sys.version_info[:3] < (2, 6, 0):
     print_error("Error: " + name + " requires Python version >= 2.6.0...")
@@ -36,10 +36,10 @@ if sys.platform == 'darwin':
         setup_requires=['py2app'],
         app=[mainscript],
         options=dict(py2app=dict(argv_emulation=True,
-                                 includes=['PyQt4.QtCore', 'PyQt4.QtGui', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'sip'],
+                                 includes=['PyQt4.QtCore', 'PyQt4.QtGui', 'PyQt4.QtNetwork', 'sip'],
                                  packages=['lib', 'gui', 'plugins'],
                                  iconfile='electrum.icns',
-                                 plist=plist,
+                                 plist=plist,strip=True,
                                  resources=["data", "icons"])),
     )
 elif sys.platform == 'win32':

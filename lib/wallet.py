@@ -103,7 +103,7 @@ class WalletStorage:
         new_path = os.path.join(config.path, "wallets", "default_wallet")
 
         # default path in pre 1.9 versions
-        old_path = os.path.join(config.path, "electrum-ltc.dat")
+        old_path = os.path.join(config.path, "electrum-doge.dat")
         if os.path.exists(old_path) and not os.path.exists(new_path):
             os.rename(old_path, new_path)
 
@@ -177,7 +177,7 @@ class NewWallet:
         self.imported_keys         = storage.get('imported_keys',{})
         self.history               = storage.get('addr_history',{})        # address -> list(txid, height)
 
-        self.fee                   = int(storage.get('fee_per_kb',100000))
+        self.fee                   = int(storage.get('fee_per_kb',100000000))
 
         self.master_public_keys = storage.get('master_public_keys',{})
         self.master_private_keys = storage.get('master_private_keys', {})

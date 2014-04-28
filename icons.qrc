@@ -1,11 +1,9 @@
 <RCC>
   <qresource prefix="/" >
-    <file>icons/electrum-ltc.png</file>
+    <file>icons/electrum-doge.png</file>
     <file>icons/clock1.png</file>
     <file>icons/clock2.png</file>
     <file>icons/clock3.png</file>
-    <file>icons/clock4.png</file>
-    <file>icons/clock5.png</file>
     <file>icons/confirmed.png</file>
     <file>icons/key.png</file>
     <file>icons/lock.png</file>
@@ -24,5 +22,6 @@
     <file>icons/unconfirmed.png</file>
     <file>icons/network.png</file>
     <file>icons/dark_background.png</file>
+    <file>icons/light_background.png</file>
   </qresource>
 </RCC>

@@ -2,8 +2,8 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 
-from electrum_ltc.i18n import _
-from electrum_ltc import Wallet, Wallet_2of3
+from electrum_doge.i18n import _
+from electrum_doge import Wallet, Wallet_2of3
 
 import seed_dialog
 from network_dialog import NetworkDialog
@@ -12,7 +12,7 @@ from amountedit import AmountEdit
 
 import sys
 import threading
-from electrum_ltc.plugins import run_hook
+from electrum_doge.plugins import run_hook
 
 class InstallWizard(QDialog):
 
@@ -246,6 +246,8 @@ class InstallWizard(QDialog):
 
         b2 = QRadioButton(gb)
         b2.setText(_("Multi-signature wallet (two-factor authentication)"))
+        #disable until stable
+        b2.setEnabled(False)
 
         grid.addWidget(b1,1,0)
         grid.addWidget(b2,2,0)

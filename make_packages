@@ -13,29 +13,29 @@ if __name__ == '__main__':
     os.system("pyrcc4 icons.qrc -o gui/qt/icons_rc.py")
     os.system("python setup.py sdist --format=zip,gztar")
     
-    _tgz="Electrum-LTC-%s.tar.gz"%version
-    _zip="Electrum-LTC-%s.zip"%version
+    _tgz="Electrum-Doge-%s.tar.gz"%version
+    _zip="Electrum-Doge-%s.zip"%version
 
 
     # android
-    os.system('rm -rf dist/el4a-%s'%version)
-    os.mkdir('dist/el4a-%s'%version)
-    shutil.copyfile("electrum-ltc",'dist/el4a-%s/el4a.py'%version)
-    shutil.copytree("ecdsa",'dist/el4a-%s/ecdsa'%version)
-    shutil.copytree("aes",'dist/el4a-%s/aes'%version)
-    shutil.copytree("lib",'dist/el4a-%s/lib'%version)
-    os.mkdir('dist/el4a-%s/gui'%version)
+    os.system('rm -rf dist/ed4a-%s'%version)
+    os.mkdir('dist/ed4a-%s'%version)
+    shutil.copyfile("electrum-doge",'dist/ed4a-%s/ed4a.py'%version)
+    shutil.copytree("ecdsa",'dist/ed4a-%s/ecdsa'%version)
+    shutil.copytree("aes",'dist/ed4a-%s/aes'%version)
+    shutil.copytree("lib",'dist/ed4a-%s/lib'%version)
+    os.mkdir('dist/ed4a-%s/gui'%version)
     for n in ['android.py']:
-        shutil.copy("gui/%s"%n,'dist/el4a-%s/gui'%version)
-    open('dist/el4a-%s/gui/__init__.py'%version,'w').close()
+        shutil.copy("gui/%s"%n,'dist/ed4a-%s/gui'%version)
+    open('dist/ed4a-%s/gui/__init__.py'%version,'w').close()
 
     os.chdir("dist")
     # create the zip file
-    os.system( "zip -r el4a-%s.zip el4a-%s"%(version, version) )
-    os.system( "rm -rf el4a-%s"%(version) )
+    os.system( "zip -r ed4a-%s.zip ed4a-%s"%(version, version) )
+    os.system( "rm -rf ed4a-%s"%(version) )
 
     # change filename because some 3G carriers do not allow users to download a zip file...
-    e4a_name = "el4a-%s.zip"%version
+    e4a_name = "ed4a-%s.zip"%version
     e4a_name2 = e4a_name.replace(".","")
     os.system( "mv %s %s"%(e4a_name, e4a_name2) )
 

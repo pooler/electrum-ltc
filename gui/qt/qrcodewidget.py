@@ -3,7 +3,7 @@ from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 
-from electrum_ltc import bmp, pyqrnative
+from electrum_doge import bmp, pyqrnative
 
 
 class QRCodeWidget(QWidget):

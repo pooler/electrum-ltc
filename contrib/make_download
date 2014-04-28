@@ -21,7 +21,7 @@ md5_zip = hashlib.md5(file('dist/'+_zip, 'r').read()).digest().encode('hex')
 
 for n in [_win, _win_portable, _win_setup, _mac]:
     if not os.path.exists("binaries/%s" % n):
-        os.system("wget http://download.electrum.org/download/%s -O binaries/%s" % (n, n))
+        os.system("wget http://electrum-doge.org/download/%s -O binaries/%s" % (n, n))
 
 md5_mac = hashlib.md5(file('binaries/'+_mac, 'r').read()).digest().encode('hex')
 md5_win = hashlib.md5(file('binaries/'+_win, 'r').read()).digest().encode('hex')

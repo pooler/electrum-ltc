@@ -38,7 +38,7 @@ class Blockchain(threading.Thread):
         self.lock = threading.Lock()
         self.local_height = 0
         self.running = False
-        self.headers_url = 'http://headers.electrum-ltc.org/blockchain_headers'
+        self.headers_url = 'http://electrum-doge.org/blockchain_headers'
         self.set_local_height()
         self.queue = Queue.Queue()
 
@@ -96,7 +96,7 @@ class Blockchain(threading.Thread):
                 # verify the chain
                 if self.verify_chain( chain ):
                     print_error("height:", height, i.server)
-                    for header in chain:
+                    for header in chain[:-1]:
                         self.save_header(header)
                 else:
                     print_error("error", i.server)
@@ -114,12 +114,16 @@ class Blockchain(threading.Thread):
         first_header = chain[0]
         prev_header = self.read_header(first_header.get('block_height') -1)
         
-        for header in chain:
+        for header in chain[:-1]:
 
             height = header.get('block_height')
 
             prev_hash = self.hash_header(prev_header)
-            bits, target = self.get_target(height/2016, chain)
+            if height <= 145000:
+                bits, target = self.get_target(height/240, chain)
+            else:
+                #Not sure about this:
+                bits, target = self.get_target(height, chain)
             _hash = self.pow_hash_header(header)
             try:
                 assert prev_hash == header.get('prev_block_hash')
@@ -136,23 +140,25 @@ class Blockchain(threading.Thread):
 
     def verify_chunk(self, index, hexdata):
         data = hexdata.decode('hex')
-        height = index*2016
+        height = index*240
         num = len(data)/80
 
         if index == 0:  
             previous_hash = ("0"*64)
         else:
-            prev_header = self.read_header(index*2016-1)
+            prev_header = self.read_header(index*240-1)
             if prev_header is None: raise
             previous_hash = self.hash_header(prev_header)
 
         bits, target = self.get_target(index)
 
         for i in range(num):
-            height = index*2016 + i
+            height = index*240 + i
             raw_header = data[i*80:(i+1)*80]
             header = self.header_from_string(raw_header)
             _hash = self.pow_hash_header(header)
+            if height > 145000:
+                bits, target = self.get_target(height, data=data)
             assert previous_hash == header.get('prev_block_hash')
             assert bits == header.get('bits')
             assert int('0x'+_hash,16) < target
@@ -213,7 +219,7 @@ class Blockchain(threading.Thread):
     def save_chunk(self, index, chunk):
         filename = self.path()
         f = open(filename,'rb+')
-        f.seek(index*2016*80)
+        f.seek(index*240*80)
         h = f.write(chunk)
         f.close()
         self.set_local_height()
@@ -250,28 +256,75 @@ class Blockchain(threading.Thread):
                 return h 
 
 
-    def get_target(self, index, chain=[]):
-
+    def get_target(self, index, chain=[],data=None):
         max_target = 0x00000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         if index == 0: return 0x1e0ffff0, 0x00000FFFF0000000000000000000000000000000000000000000000000000000
 
-        # Litecoin: go back the full period unless it's the first retarget
-        if index == 1:
-            first = self.read_header(0)
-        else:
-            first = self.read_header((index-1)*2016-1)
-        last = self.read_header(index*2016-1)
-        if last is None:
+        digishield = False
+        if index > 145000:
+            digishield = True
+        # Dogecoin: go back the full period unless it's the first retarget
+        if digishield and data:
+            m = index%240
+            if m == 0:
+                first = self.read_header(index-1)
+            else:
+                raw_header = data[(m-1)*80:m*80]
+                first = self.header_from_string(raw_header)
+            try:
+                raw_l_header = data[m*80:(m+1)*80]
+                last = self.header_from_string(raw_l_header)
+            except:
+                last = None
+            if last is None:
+                for h in chain:
+                    if h.get('block_height') == index-1:
+                        last = h
+        elif digishield:
+            try:
+                last = self.read_header(index)
+            except Exception:
+                pass
+            try:
+                first = self.read_header(index-1)
+            except Exception:
+                pass
             for h in chain:
-                if h.get('block_height') == index*2016-1:
+                if h.get('block_height') == index:
                     last = h
- 
-        nActualTimespan = last.get('timestamp') - first.get('timestamp')
-        nTargetTimespan = 84*60*60
-        nActualTimespan = max(nActualTimespan, nTargetTimespan/4)
-        nActualTimespan = min(nActualTimespan, nTargetTimespan*4)
+                if h.get('block_height') == index-1:
+                    first = h
+        else:
+            if index == 1:
+                first = self.read_header(0)
+            else:
+                first = self.read_header((index-1)*240-1)
+            last = self.read_header(index*240-1)
+            if last is None:
+                for h in chain:
+                    if h.get('block_height') == index*240-1:
+                        last = h
 
-        bits = last.get('bits') 
+        nActualTimespan = last.get('timestamp') - first.get('timestamp')
+        nTargetTimespan = 4*60*60
+        if index <= 5000:
+            nActualTimespan = max(nActualTimespan, nTargetTimespan/16)
+            nActualTimespan = min(nActualTimespan, nTargetTimespan*4)
+        elif index <= 10000:
+            nActualTimespan = max(nActualTimespan, nTargetTimespan/8)
+            nActualTimespan = min(nActualTimespan, nTargetTimespan*4)
+        elif index <= 145000:
+            nActualTimespan = max(nActualTimespan, nTargetTimespan/4)
+            nActualTimespan = min(nActualTimespan, nTargetTimespan*4)
+        else:
+            nTargetTimespan = 60
+            nActualTimespan = nTargetTimespan + (nActualTimespan - nTargetTimespan)/8
+            if nActualTimespan < (nTargetTimespan - (nTargetTimespan/4)):
+                nActualTimespan = nTargetTimespan - (nTargetTimespan/4)
+            if nActualTimespan > (nTargetTimespan + (nTargetTimespan/2)):
+                nActualTimespan = nTargetTimespan + (nTargetTimespan/2)
+
+        bits = last.get('bits')
         # convert to bignum
         MM = 256*256*256
         a = bits%MM
@@ -280,7 +333,11 @@ class Blockchain(threading.Thread):
         target = (a) * pow(2, 8 * (bits/MM - 3))
 
         # new target
-        new_target = min( max_target, (target * nActualTimespan)/nTargetTimespan )
+        #not sure about this, but it seems to work:
+        if index > 145000:
+            new_target = target
+        else:
+            new_target = min( max_target, (target * nActualTimespan)/nTargetTimespan )
         
         # convert it to bits
         c = ("%064X"%new_target)[2:]
@@ -335,6 +392,7 @@ class Blockchain(threading.Thread):
         chain = [ final_header ]
         requested_header = False
         queue = Queue.Queue()
+        height = header.get('block_height')
 
         while self.is_running():
 
@@ -367,8 +425,8 @@ class Blockchain(threading.Thread):
     def get_and_verify_chunks(self, i, header, height):
 
         queue = Queue.Queue()
-        min_index = (self.local_height + 1)/2016
-        max_index = (height + 1)/2016
+        min_index = (self.local_height + 1)/240
+        max_index = (height + 1)/240
         n = min_index
         while n < max_index + 1:
             print_error( "Requesting chunk:", n )

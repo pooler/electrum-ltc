@@ -2,10 +2,10 @@
 
 # A simple script that connects to a server and displays block headers
 
-import time, electrum_ltc as electrum
+import time, electrum_doge as electrum
 
 # 1. start the interface and wait for connection
-interface = electrum.Interface('electrum-ltc.bysh.me:50002:s')
+interface = electrum.Interface('electrum.payb.ee:50002:s')
 interface.start(wait = True)
 if not interface.is_connected:
     print "not connected"

@@ -23,8 +23,8 @@ data_files = []
 if (len(sys.argv) > 1 and (sys.argv[1] == "sdist")) or (platform.system() != 'Windows' and platform.system() != 'Darwin'):
     print "Including all files"
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['electrum-ltc.desktop']),
-        (os.path.join(usr_share, 'app-install', 'icons/'), ['icons/electrum-ltc.png'])
+        (os.path.join(usr_share, 'applications/'), ['electrum-doge.desktop']),
+        (os.path.join(usr_share, 'app-install', 'icons/'), ['icons/electrum-doge.png'])
     ]
     if not os.path.exists('locale'):
         os.mkdir('locale')
@@ -34,7 +34,7 @@ if (len(sys.argv) > 1 and (sys.argv[1] == "sdist")) or (platform.system() != 'Wi
 
 appdata_dir = util.appdata_dir()
 if not os.access(appdata_dir, os.W_OK):
-    appdata_dir = os.path.join(usr_share, "electrum-ltc")
+    appdata_dir = os.path.join(usr_share, "electrum-doge")
 
 data_files += [
     (appdata_dir, ["data/README"]),
@@ -46,6 +46,10 @@ data_files += [
         "data/sahara/name.cfg",
         "data/sahara/style.css"
     ]),
+    (os.path.join(appdata_dir, "minidoge"), [
+        "data/minidoge/name.cfg",
+        "data/minidoge/style.css"
+    ]),
     (os.path.join(appdata_dir, "dark"), [
         "data/dark/name.cfg",
         "data/dark/style.css"
@@ -54,68 +58,69 @@ data_files += [
 
 
 setup(
-    name="Electrum-LTC",
+    name="Electrum-Doge",
     version=version.ELECTRUM_VERSION,
     install_requires=['slowaes', 'ecdsa>=0.9', 'ltc_scrypt'],
     package_dir={
-        'electrum_ltc': 'lib',
-        'electrum_ltc_gui': 'gui',
-        'electrum_ltc_plugins': 'plugins',
+        'electrum_doge': 'lib',
+        'electrum_doge_gui': 'gui',
+        'electrum_doge_plugins': 'plugins',
     },
-    scripts=['electrum-ltc'],
+    scripts=['electrum-doge'],
     data_files=data_files,
     py_modules=[
-        'electrum_ltc.account',
-        'electrum_ltc.bitcoin',
-        'electrum_ltc.blockchain',
-        'electrum_ltc.bmp',
-        'electrum_ltc.commands',
-        'electrum_ltc.daemon',
-        'electrum_ltc.i18n',
-        'electrum_ltc.interface',
-        'electrum_ltc.mnemonic',
-        'electrum_ltc.msqr',
-        'electrum_ltc.network',
-        'electrum_ltc.plugins',
-        'electrum_ltc.pyqrnative',
-        'electrum_ltc.scrypt',
-        'electrum_ltc.simple_config',
-        'electrum_ltc.socks',
-        'electrum_ltc.transaction',
-        'electrum_ltc.util',
-        'electrum_ltc.verifier',
-        'electrum_ltc.version',
-        'electrum_ltc.wallet',
-        'electrum_ltc.wallet_bitkey',
-        'electrum_ltc_gui.gtk',
-        'electrum_ltc_gui.qt.__init__',
-        'electrum_ltc_gui.qt.amountedit',
-        'electrum_ltc_gui.qt.console',
-        'electrum_ltc_gui.qt.history_widget',
-        'electrum_ltc_gui.qt.icons_rc',
-        'electrum_ltc_gui.qt.installwizard',
-        'electrum_ltc_gui.qt.lite_window',
-        'electrum_ltc_gui.qt.main_window',
-        'electrum_ltc_gui.qt.network_dialog',
-        'electrum_ltc_gui.qt.password_dialog',
-        'electrum_ltc_gui.qt.qrcodewidget',
-        'electrum_ltc_gui.qt.receiving_widget',
-        'electrum_ltc_gui.qt.seed_dialog',
-        'electrum_ltc_gui.qt.transaction_dialog',
-        'electrum_ltc_gui.qt.util',
-        'electrum_ltc_gui.qt.version_getter',
-        'electrum_ltc_gui.stdio',
-        'electrum_ltc_gui.text',
-        'electrum_ltc_plugins.exchange_rate',
-        'electrum_ltc_plugins.labels',
-        'electrum_ltc_plugins.pointofsale',
-        'electrum_ltc_plugins.qrscanner',
-        'electrum_ltc_plugins.virtualkeyboard',
+        'electrum_doge.account',
+        'electrum_doge.bitcoin',
+        'electrum_doge.blockchain',
+        'electrum_doge.bmp',
+        'electrum_doge.commands',
+        'electrum_doge.daemon',
+        'electrum_doge.i18n',
+        'electrum_doge.interface',
+        'electrum_doge.mnemonic',
+        'electrum_doge.msqr',
+        'electrum_doge.network',
+        'electrum_doge.plugins',
+        'electrum_doge.pyqrnative',
+        'electrum_doge.scrypt',
+        'electrum_doge.simple_config',
+        'electrum_doge.socks',
+        'electrum_doge.transaction',
+        'electrum_doge.util',
+        'electrum_doge.verifier',
+        'electrum_doge.version',
+        'electrum_doge.wallet',
+        'electrum_doge.wallet_bitkey',
+        'electrum_doge_gui.gtk',
+        'electrum_doge_gui.qt.__init__',
+        'electrum_doge_gui.qt.amountedit',
+        'electrum_doge_gui.qt.console',
+        'electrum_doge_gui.qt.history_widget',
+        'electrum_doge_gui.qt.icons_rc',
+        'electrum_doge_gui.qt.installwizard',
+        'electrum_doge_gui.qt.lite_window',
+        'electrum_doge_gui.qt.main_window',
+        'electrum_doge_gui.qt.network_dialog',
+        'electrum_doge_gui.qt.password_dialog',
+        'electrum_doge_gui.qt.qrcodewidget',
+        'electrum_doge_gui.qt.receiving_widget',
+        'electrum_doge_gui.qt.seed_dialog',
+        'electrum_doge_gui.qt.transaction_dialog',
+        'electrum_doge_gui.qt.util',
+        'electrum_doge_gui.qt.version_getter',
+        'electrum_doge_gui.stdio',
+        'electrum_doge_gui.text',
+        'electrum_doge_plugins.aliases',
+        'electrum_doge_plugins.exchange_rate',
+        'electrum_doge_plugins.labels',
+        'electrum_doge_plugins.pointofsale',
+        'electrum_doge_plugins.qrscanner',
+        'electrum_doge_plugins.virtualkeyboard',
     ],
-    description="Lightweight Litecoin Wallet",
-    author="ecdsa",
-    author_email="ecdsa@github",
+    description="Lightweight Dogecoin Wallet",
+    author="paybee",
+    author_email="paybee@github",
     license="GNU GPLv3",
-    url="http://electrum-ltc.org",
-    long_description="""Lightweight Litecoin Wallet"""
+    url="http://electrum-doge.org",
+    long_description="""Lightweight Dogecoin Wallet"""
 )
