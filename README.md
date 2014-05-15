@@ -1,4 +1,5 @@
 Electrum-LTC - lightweight Litecoin client
+==========================================
 
 Licence: GNU GPL v3
 Author: Thomas Voegtlin
