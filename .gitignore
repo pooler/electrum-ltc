@@ -4,19 +4,44 @@
 build/
 dist/
 *.egg/
-/electrum.py
-contrib/pyinstaller/
-Electrum.egg-info/
-gui/qt/icons_rc.py
-locale/
+Electrum_LTC.egg-info/
+electrum_ltc/locale/
 .devlocaltmp/
 *_trial_temp
 packages
 env/
-.tox/
 .buildozer/
 bin/
+/app.fil
+.idea
+.mypy_cache
+.vscode
+electrum-ltc_data
 
-# tox files
+# icons
+electrum_ltc/gui/kivy/theming/light-0.png
+electrum_ltc/gui/kivy/theming/light-1.png
+electrum_ltc/gui/kivy/theming/light.atlas
+
+# tests/tox
+.tox/
 .cache/
 .coverage
+.pytest_cache
+
+# build workspaces
+contrib/build-wine/tmp/
+contrib/build-wine/fresh_clone/
+contrib/build-linux/sdist/fresh_clone/
+contrib/build-linux/appimage/build/
+contrib/build-linux/appimage/.cache/
+contrib/android_debug.keystore
+contrib/android/android_debug.keystore
+contrib/secp256k1/
+contrib/zbar/
+
+# shared objects
+electrum_ltc/*.so
+electrum_ltc/*.so.0
+electrum_ltc/*.dll
+electrum_ltc/*.dylib

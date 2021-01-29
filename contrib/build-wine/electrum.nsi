@@ -1,13 +1,13 @@
 ;--------------------------------
 ;Include Modern UI
-  !include "TextFunc.nsh" ;Needed for the $GetSize fuction. I know, doesn't sound logical, it isn't.
+  !include "TextFunc.nsh" ;Needed for the $GetSize function. I know, doesn't sound logical, it isn't.
   !include "MUI2.nsh"
   
 ;--------------------------------
 ;Variables
 
-  !define PRODUCT_NAME "Electrum"
-  !define PRODUCT_WEB_SITE "https://github.com/spesmilo/electrum"
+  !define PRODUCT_NAME "Electrum-LTC"
+  !define PRODUCT_WEB_SITE "https://github.com/pooler/electrum-ltc"
   !define PRODUCT_PUBLISHER "Electrum Technologies GmbH"
   !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 
@@ -16,7 +16,7 @@
 
   ;Name and file
   Name "${PRODUCT_NAME}"
-  OutFile "dist/electrum-setup.exe"
+  OutFile "dist/electrum-ltc-setup.exe"
 
   ;Default installation folder
   InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
@@ -58,7 +58,7 @@
   VIAddVersionKey ProductName "${PRODUCT_NAME} Installer"
   VIAddVersionKey Comments "The installer for ${PRODUCT_NAME}"
   VIAddVersionKey CompanyName "${PRODUCT_NAME}"
-  VIAddVersionKey LegalCopyright "2013-2016 ${PRODUCT_PUBLISHER}"
+  VIAddVersionKey LegalCopyright "2013-2018 ${PRODUCT_PUBLISHER}"
   VIAddVersionKey FileDescription "${PRODUCT_NAME} Installer"
   VIAddVersionKey FileVersion ${PRODUCT_VERSION}
   VIAddVersionKey ProductVersion ${PRODUCT_VERSION}
@@ -72,7 +72,7 @@
   !define MUI_ABORTWARNING
   !define MUI_ABORTWARNING_TEXT "Are you sure you wish to abort the installation of ${PRODUCT_NAME}?"
   
-  !define MUI_ICON "tmp\electrum\icons\electrum.ico"
+  !define MUI_ICON "c:\electrum-ltc\electrum_ltc\gui\icons\electrum.ico"
   
 ;--------------------------------
 ;Pages
@@ -110,8 +110,8 @@ Section
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\*.*"
   
   ;Files to pack into the installer
-  File /r "dist\electrum\*.*"
-  File "..\..\icons\electrum.ico"
+  File /r "dist\electrum-ltc\*.*"
+  File "c:\electrum-ltc\electrum_ltc\gui\icons\electrum.ico"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\${PRODUCT_NAME}" "" $INSTDIR
@@ -122,23 +122,23 @@ Section
 
   ;Create desktop shortcut
   DetailPrint "Creating desktop shortcut..."
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-${PRODUCT_VERSION}.exe" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-ltc-${PRODUCT_VERSION}.exe" ""
 
   ;Create start-menu items
   DetailPrint "Creating start-menu items..."
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-${PRODUCT_VERSION}.exe" "" "$INSTDIR\electrum-${PRODUCT_VERSION}.exe" 0
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME} Testnet.lnk" "$INSTDIR\electrum-${PRODUCT_VERSION}.exe" "--testnet" "$INSTDIR\electrum-${PRODUCT_VERSION}.exe" 0
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-ltc-${PRODUCT_VERSION}.exe" "" "$INSTDIR\electrum-ltc-${PRODUCT_VERSION}.exe" 0
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME} Testnet.lnk" "$INSTDIR\electrum-ltc-${PRODUCT_VERSION}.exe" "--testnet" "$INSTDIR\electrum-ltc-${PRODUCT_VERSION}.exe" 0
 
 
   ;Links bitcoin: URI's to Electrum
-  WriteRegStr HKCU "Software\Classes\bitcoin" "" "URL:bitcoin Protocol"
-  WriteRegStr HKCU "Software\Classes\bitcoin" "URL Protocol" ""
-  WriteRegStr HKCU "Software\Classes\bitcoin" "DefaultIcon" "$\"$INSTDIR\electrum.ico, 0$\""
-  WriteRegStr HKCU "Software\Classes\bitcoin\shell\open\command" "" "$\"$INSTDIR\electrum-${PRODUCT_VERSION}.exe$\" $\"%1$\""
+  WriteRegStr HKCU "Software\Classes\litecoin" "" "URL:litecoin Protocol"
+  WriteRegStr HKCU "Software\Classes\litecoin" "URL Protocol" ""
+  WriteRegStr HKCU "Software\Classes\litecoin" "DefaultIcon" "$\"$INSTDIR\electrum.ico, 0$\""
+  WriteRegStr HKCU "Software\Classes\litecoin\shell\open\command" "" "$\"$INSTDIR\electrum-ltc-${PRODUCT_VERSION}.exe$\" $\"%1$\""
 
-  ;Adds an uninstaller possibilty to Windows Uninstall or change a program section
+  ;Adds an uninstaller possibility to Windows Uninstall or change a program section
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
@@ -167,7 +167,7 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\*.*"
   RMDir  "$SMPROGRAMS\${PRODUCT_NAME}"
   
-  DeleteRegKey HKCU "Software\Classes\bitcoin"
+  DeleteRegKey HKCU "Software\Classes\litecoin"
   DeleteRegKey HKCU "Software\${PRODUCT_NAME}"
   DeleteRegKey HKCU "${PRODUCT_UNINST_KEY}"
 SectionEnd
