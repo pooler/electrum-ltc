@@ -1,9 +1,9 @@
-[submodule "contrib/deterministic-build/electrum-ltc-locale"]
-	path = contrib/deterministic-build/electrum-ltc-locale
-	url = https://github.com/pooler/electrum-ltc-locale
+[submodule "contrib/deterministic-build/electrum_silver -locale"]
+	path = contrib/deterministic-build/electrum_silver -locale
+	url = https://github.com/pooler/electrum_silver -locale
 [submodule "electrum_ltc/www"]
 	path = electrum_ltc/plugins/payserver/www
-	url = https://github.com/pooler/electrum-ltc-http.git
+	url = https://github.com/pooler/electrum_silver -http.git
 [submodule "electrum_ltc/gui/kivy/theming/atlas"]
 	path = electrum_ltc/gui/kivy/theming/atlas
 	url = https://github.com/spesmilo/electrum-kivy-atlas

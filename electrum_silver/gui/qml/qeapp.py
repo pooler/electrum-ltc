@@ -103,7 +103,7 @@ class QEAppController(QObject):
             if not notification:
                 from plyer import notification
             icon = (os.path.dirname(os.path.realpath(__file__))
-                    + '/../icons/electrum-ltc.png')
+                    + '/../icons/electrum_silver .png')
             notification.notify('Electrum', message, app_icon=icon, app_name='Electrum')
         except ImportError:
             self.logger.warning('Notification: needs plyer; `sudo python3 -m pip install plyer`')

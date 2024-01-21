@@ -5,13 +5,13 @@
         "t": "50001",
         "version": "1.4.2"
     },
-    "backup.electrum-ltc.org": {
+    "backup.electrum_silver .org": {
         "pruning": "-",
         "s": "443",
         "t": "50001",
         "version": "1.4.2"
     },
-    "electrum-ltc.bysh.me": {
+    "electrum_silver .bysh.me": {
         "pruning": "-",
         "s": "50002",
         "t": "50001",

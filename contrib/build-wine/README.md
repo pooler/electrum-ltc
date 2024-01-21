@@ -30,10 +30,10 @@ similar system.
 
 ## Code Signing
 
-Electrum-LTC Windows builds are signed with a Microsoft Authenticode™ code signing
+electrum_silver  Windows builds are signed with a Microsoft Authenticode™ code signing
 certificate in addition to the GPG-based signatures.
 
-The advantage of using Authenticode is that Electrum-LTC users won't receive a 
+The advantage of using Authenticode is that electrum_silver  users won't receive a 
 Windows SmartScreen warning when starting it.
 
 The release signing procedure involves a signer (the holder of the
@@ -51,7 +51,7 @@ certificate/key) and one or multiple trusted verifiers:
 
 | Signer and verifiers:                                                                            |
 |--------------------------------------------------------------------------------------------------|
-| Upload signatures to 'electrum-ltc-signatures' repo, as `$version/$filename.$builder.asc`        |
+| Upload signatures to 'electrum_silver -signatures' repo, as `$version/$filename.$builder.asc`        |
 
 
 

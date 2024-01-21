@@ -11,6 +11,6 @@ Item {
     Image {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        source: "../../icons/electrum-ltc.png"
+        source: "../../icons/electrum_silver .png"
     }
 }

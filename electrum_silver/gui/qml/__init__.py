@@ -50,7 +50,7 @@ class ElectrumGui(Logger):
         if hasattr(QtCore.Qt, "AA_ShareOpenGLContexts"):
             QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
         if hasattr(QGuiApplication, 'setDesktopFileName'):
-            QGuiApplication.setDesktopFileName('electrum-ltc.desktop')
+            QGuiApplication.setDesktopFileName('electrum_silver .desktop')
         if hasattr(QtCore.Qt, "AA_EnableHighDpiScaling"):
             QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
 

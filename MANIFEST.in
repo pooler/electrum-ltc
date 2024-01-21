@@ -1,6 +1,6 @@
 include LICENCE RELEASE-NOTES AUTHORS
 include README.md
-include electrum-ltc.desktop
+include electrum_silver .desktop
 include *.py
 include run_electrum
 recursive-include packages *.py

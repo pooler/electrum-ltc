@@ -35,9 +35,9 @@ data_files = []
 if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
     # note: we can't use absolute paths here. see #7787
     data_files += [
-        (os.path.join('share', 'applications'),               ['electrum-ltc.desktop']),
-        (os.path.join('share', 'pixmaps'),                    ['electrum_ltc/gui/icons/electrum-ltc.png']),
-        (os.path.join('share', 'icons/hicolor/128x128/apps'), ['electrum_ltc/gui/icons/electrum-ltc.png']),
+        (os.path.join('share', 'applications'),               ['electrum_silver .desktop']),
+        (os.path.join('share', 'pixmaps'),                    ['electrum_ltc/gui/icons/electrum_silver .png']),
+        (os.path.join('share', 'icons/hicolor/128x128/apps'), ['electrum_ltc/gui/icons/electrum_silver .png']),
     ]
 
 extras_require = {
@@ -55,7 +55,7 @@ extras_require['fast'] = extras_require['crypto']
 
 
 setup(
-    name="Electrum-LTC",
+    name="electrum_silver ",
     version=version.ELECTRUM_VERSION,
     python_requires='>={}'.format(MIN_PYTHON_VERSION),
     install_requires=requirements,
@@ -70,12 +70,12 @@ setup(
     # package_data kwarg lists what gets put in site-packages when pip installing the tar.gz.
     # By specifying include_package_data=True, MANIFEST.in becomes responsible for both.
     include_package_data=True,
-    scripts=['electrum_ltc/electrum-ltc'],
+    scripts=['electrum_ltc/electrum_silver '],
     data_files=data_files,
     description="Lightweight Litecoin Wallet",
     author="Thomas Voegtlin",
     author_email="thomasv@electrum.org",
     license="MIT Licence",
-    url="https://electrum-ltc.org",
+    url="https://electrum_silver .org",
     long_description="""Lightweight Litecoin Wallet""",
 )

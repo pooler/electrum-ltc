@@ -15,7 +15,7 @@ from electrum_ltc.util import create_and_start_event_loop, log_exceptions
 
 loop, stopping_fut, loop_thread = create_and_start_event_loop()
 
-config = SimpleConfig({"testnet": True})  # to use ~/.electrum-ltc/testnet as datadir
+config = SimpleConfig({"testnet": True})  # to use ~/.electrum_silver /testnet as datadir
 constants.set_testnet()  # to set testnet magic bytes
 daemon = Daemon(config, listen_jsonrpc=False)
 network = daemon.network

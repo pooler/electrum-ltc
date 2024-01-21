@@ -4,7 +4,7 @@ Building macOS binaries
 ✓ _This binary should be reproducible, meaning you should be able to generate
    binaries that match the official releases._
 
-This guide explains how to build Electrum-LTC binaries for macOS systems.
+This guide explains how to build electrum_silver  binaries for macOS systems.
 
 
 ## Building the binary
@@ -39,8 +39,8 @@ Before starting, you should install [`brew`](https://brew.sh/).
 - We recommend creating a VM with a macOS guest, e.g. using VirtualBox,
   and building there.
 - The guest should run macOS 10.14.6 (that specific version).
-- The unix username should be `vagrant`, and `electrum-ltc` should be cloned directly
-  to the user's home dir: `/Users/vagrant/electrum-ltc`.
+- The unix username should be `vagrant`, and `electrum_silver ` should be cloned directly
+  to the user's home dir: `/Users/vagrant/electrum_silver `.
 - Builders need to use the same version of Xcode; and note that
   full Xcode and Xcode commandline tools differ!
   - Xcode CLI tools are sufficient for everything, except it is missing `altool`,
@@ -100,12 +100,12 @@ $ sudo installer -package "/Volumes/Command Line Developer Tools/Command Line To
 $ hdiutil detach "/Volumes/Command Line Developer Tools"
 ```
 
-#### 2. Build Electrum-LTC
+#### 2. Build electrum_silver 
 
-    cd electrum-ltc
+    cd electrum_silver 
     ./contrib/osx/make_osx.sh
 
-This creates both a folder named Electrum-LTC.app and the .dmg file.
+This creates both a folder named electrum_silver .app and the .dmg file.
 
 If you want the binaries codesigned for MacOS and notarised by Apple's central server,
 provide these env vars to the `make_osx.sh` script:

@@ -32,18 +32,18 @@ DMG_UNSIGNED_UNPACKED="$WORKSPACE/dmg1"
 DMG_RELEASE_UNPACKED="$WORKSPACE/dmg2"
 
 hdiutil attach "$UNSIGNED_DMG"
-cp -r /Volumes/Electrum-LTC "$DMG_UNSIGNED_UNPACKED"
-hdiutil detach /Volumes/Electrum-LTC
+cp -r /Volumes/electrum_silver  "$DMG_UNSIGNED_UNPACKED"
+hdiutil detach /Volumes/electrum_silver 
 
 hdiutil attach "$RELEASE_DMG"
-cp -r /Volumes/Electrum-LTC "$DMG_RELEASE_UNPACKED"
-hdiutil detach /Volumes/Electrum-LTC
+cp -r /Volumes/electrum_silver  "$DMG_RELEASE_UNPACKED"
+hdiutil detach /Volumes/electrum_silver 
 
 # copy signatures from RELEASE_DMG to UNSIGNED_DMG
 echo "Extracting signatures from release app..."
-QUIET="1" "$CONTRIB_OSX/extract_sigs.sh" "$DMG_RELEASE_UNPACKED"/Electrum-LTC.app
+QUIET="1" "$CONTRIB_OSX/extract_sigs.sh" "$DMG_RELEASE_UNPACKED"/electrum_silver .app
 echo "Applying extracted signatures to unsigned app..."
-QUIET="1" "$CONTRIB_OSX/apply_sigs.sh" "$DMG_UNSIGNED_UNPACKED"/Electrum-LTC.app mac_extracted_sigs.tar.gz
+QUIET="1" "$CONTRIB_OSX/apply_sigs.sh" "$DMG_UNSIGNED_UNPACKED"/electrum_silver .app mac_extracted_sigs.tar.gz
 
 rm mac_extracted_sigs.tar.gz
 rm -rf "$DMG_UNSIGNED_UNPACKED"

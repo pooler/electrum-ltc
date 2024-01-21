@@ -28,7 +28,7 @@ info "preparing electrum-locale."
     LOCALE="$PROJECT_ROOT/electrum_ltc/locale/"
     # we want the binary to have only compiled (.mo) locale files; not source (.po) files
     rm -rf "$LOCALE"
-    "$CONTRIB/build_locale.sh" "$CONTRIB/deterministic-build/electrum-ltc-locale/locale/" "$LOCALE"
+    "$CONTRIB/build_locale.sh" "$CONTRIB/deterministic-build/electrum_silver -locale/locale/" "$LOCALE"
 )
 
 pushd "$CONTRIB_ANDROID"
@@ -38,7 +38,7 @@ info "apk building phase starts."
 # Uncomment and change below to set a custom android package id,
 # e.g. to allow simultaneous mainnet and testnet installs of the apk.
 # defaults:
-#   export APP_PACKAGE_NAME=Electrum-LTC
+#   export APP_PACKAGE_NAME=electrum_silver 
 #   export APP_PACKAGE_DOMAIN=org.electrum_ltc
 # FIXME: changing "APP_PACKAGE_NAME" seems to require a clean rebuild of ".buildozer/",
 #        to avoid that, maybe change "APP_PACKAGE_DOMAIN" instead.

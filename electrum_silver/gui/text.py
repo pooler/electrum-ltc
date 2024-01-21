@@ -54,7 +54,7 @@ class ElectrumGui(BaseElectrumGui, EventListener):
         self.network = daemon.network
         storage = WalletStorage(config.get_wallet_path())
         if not storage.file_exists():
-            print("Wallet not found. try 'electrum-ltc create'")
+            print("Wallet not found. try 'electrum_silver  create'")
             exit()
         if storage.is_encrypted():
             password = getpass.getpass('Password:', stream=None)

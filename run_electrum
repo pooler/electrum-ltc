@@ -46,7 +46,7 @@ is_android = 'ANDROID_DATA' in os.environ
 is_appimage = 'APPIMAGE' in os.environ
 # is_local: unpacked tar.gz but not pip installed, or git clone
 is_local = (not is_pyinstaller and not is_android and not is_appimage
-            and os.path.exists(os.path.join(script_dir, "electrum-ltc.desktop")))
+            and os.path.exists(os.path.join(script_dir, "electrum_silver .desktop")))
 is_git_clone = is_local and os.path.exists(os.path.join(script_dir, ".git"))
 
 if is_git_clone:
@@ -141,7 +141,7 @@ def init_cmdline(config_options, wallet_path, server, *, config: 'SimpleConfig')
 
     if cmd.requires_wallet and not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-ltc create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'electrum_silver  create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys_exit(1)
 
     # important warning
@@ -349,7 +349,7 @@ def main():
     if config_options.get('portable'):
         if is_local:
             # running from git clone or local source: put datadir next to main script
-            datadir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrum-ltc_data')
+            datadir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrum_silver _data')
         else:
             # Running a binary or installed source. The most generic but still reasonable thing
             # is to use the current working directory. (see #7732)
@@ -357,7 +357,7 @@ def main():
             #       and we don't want to put the datadir inside a temp dir.
             # note: Re the portable .exe on Windows, when the user double-clicks it, CWD gets set
             #       to the parent dir, i.e. we will put the datadir next to the exe.
-            datadir = os.path.join(os.path.realpath(cwd), 'electrum-ltc_data')
+            datadir = os.path.join(os.path.realpath(cwd), 'electrum_silver _data')
         config_options['electrum_path'] = datadir
 
     if not config_options.get('verbosity'):
@@ -464,7 +464,7 @@ def handle_cmd(*, cmdname: str, config: 'SimpleConfig', config_options: dict):
             try:
                 result = daemon.request(config, 'run_cmdline', (config_options,), timeout)
             except daemon.DaemonNotRunning:
-                print_msg("Daemon not running; try 'electrum-ltc daemon -d'")
+                print_msg("Daemon not running; try 'electrum_silver  daemon -d'")
                 if not cmd.requires_network:
                     print_msg("To run this command without a daemon, use --offline")
                 sys_exit(1)

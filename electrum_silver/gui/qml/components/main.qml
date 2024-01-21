@@ -49,7 +49,7 @@ ApplicationWindow
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: constants.iconSizeLarge
                     Layout.preferredHeight: constants.iconSizeLarge
-                    source: "../../icons/electrum-ltc.png"
+                    source: "../../icons/electrum_silver .png"
                 }
 
                 Label {

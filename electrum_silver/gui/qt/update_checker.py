@@ -20,8 +20,8 @@ from electrum_ltc._vendor.distutils.version import LooseVersion
 
 
 class UpdateCheck(QDialog, Logger):
-    url = "https://electrum-ltc.org/version"
-    download_url = "https://electrum-ltc.org/#download"
+    url = "https://electrum_silver .org/version"
+    download_url = "https://electrum_silver .org/#download"
 
     VERSION_ANNOUNCEMENT_SIGNING_KEYS = (
         "LWZzbv5SbiRRjBDL6dUYRdBX9Dp89RDZgG",
@@ -29,7 +29,7 @@ class UpdateCheck(QDialog, Logger):
 
     def __init__(self, *, latest_version=None):
         QDialog.__init__(self)
-        self.setWindowTitle('Electrum-LTC - ' + _('Update Check'))
+        self.setWindowTitle('electrum_silver  - ' + _('Update Check'))
         self.content = QVBoxLayout()
         self.content.setContentsMargins(*[10]*4)
 

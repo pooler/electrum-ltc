@@ -9,8 +9,8 @@
 
 ### 1. Check out the code from GitHub:
 ```
-> git clone https://github.com/pooler/electrum-ltc.git
-> cd electrum-ltc
+> git clone https://github.com/pooler/electrum_silver .git
+> cd electrum_silver 
 > git submodule update --init
 ```
 

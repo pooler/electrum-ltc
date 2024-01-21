@@ -30,7 +30,7 @@ docker build \
 # maybe do fresh clone
 if [ ! -z "$ELECBUILD_COMMIT" ] ; then
     info "ELECBUILD_COMMIT=$ELECBUILD_COMMIT. doing fresh clone and git checkout."
-    FRESH_CLONE="$CONTRIB_SDIST/fresh_clone/electrum-ltc" && \
+    FRESH_CLONE="$CONTRIB_SDIST/fresh_clone/electrum_silver " && \
         rm -rf "$FRESH_CLONE" && \
         umask 0022 && \
         git clone "$PROJECT_ROOT" "$FRESH_CLONE" && \
@@ -44,9 +44,9 @@ fi
 info "building binary..."
 docker run -it \
     --name electrum-sdist-builder-cont \
-    -v "$PROJECT_ROOT_OR_FRESHCLONE_ROOT":/opt/electrum-ltc \
+    -v "$PROJECT_ROOT_OR_FRESHCLONE_ROOT":/opt/electrum_silver  \
     --rm \
-    --workdir /opt/electrum-ltc/contrib/build-linux/sdist \
+    --workdir /opt/electrum_silver /contrib/build-linux/sdist \
     --env OMIT_UNCLEAN_FILES \
     electrum-sdist-builder-img \
     ./make_sdist.sh

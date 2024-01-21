@@ -103,7 +103,7 @@ Item {
             action: Action {
                 text: qsTr('About');
                 onTriggered: menu.openPage(Qt.resolvedUrl('About.qml'))
-                icon.source: '../../icons/electrum-ltc.png'
+                icon.source: '../../icons/electrum_silver .png'
             }
         }
 

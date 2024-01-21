@@ -5,8 +5,8 @@ set -e
 # Parameterize
 PYTHON_VERSION=3.9.13
 PY_VER_MAJOR="3.9"  # as it appears in fs paths
-PACKAGE=Electrum-LTC
-GIT_REPO=https://github.com/pooler/electrum-ltc
+PACKAGE=electrum_silver 
+GIT_REPO=https://github.com/pooler/electrum_silver 
 
 export GCC_STRIP_BINARIES="1"
 export PYTHONDONTWRITEBYTECODE=1  # don't create __pycache__/ folders with .pyc files
@@ -174,7 +174,7 @@ info "generating locale"
     LOCALE="$PROJECT_ROOT/electrum_ltc/locale/"
     # we want the binary to have only compiled (.mo) locale files; not source (.po) files
     rm -rf "$LOCALE"
-    "$CONTRIB/build_locale.sh" "$CONTRIB/deterministic-build/electrum-ltc-locale/locale/" "$LOCALE"
+    "$CONTRIB/build_locale.sh" "$CONTRIB/deterministic-build/electrum_silver -locale/locale/" "$LOCALE"
 ) || fail "failed generating locale"
 
 
@@ -253,9 +253,9 @@ if [ ! -z "$CODESIGN_CERT" ]; then
 fi
 
 info "Creating .DMG"
-hdiutil create -fs HFS+ -volname $PACKAGE -srcfolder dist/$PACKAGE.app dist/electrum-ltc-$VERSION.dmg || fail "Could not create .DMG"
+hdiutil create -fs HFS+ -volname $PACKAGE -srcfolder dist/$PACKAGE.app dist/electrum_silver -$VERSION.dmg || fail "Could not create .DMG"
 
-DoCodeSignMaybe ".DMG" "dist/electrum-ltc-${VERSION}.dmg"
+DoCodeSignMaybe ".DMG" "dist/electrum_silver -${VERSION}.dmg"
 
 if [ -z "$CODESIGN_CERT" ]; then
     warn "App was built successfully but was not code signed. Users may get security warnings from macOS."

@@ -24,15 +24,15 @@ export PATH=$PATH:~/bin
 
 
 if [ -z "$1" ]; then
-    echo "Usage: $0 Electrum-LTC.app"
+    echo "Usage: $0 electrum_silver .app"
     exit -127
 fi
 
 mkdir -p ~/bin
 
 if ! which ${genisoimage} > /dev/null 2>&1; then
-    mkdir -p /tmp/electrum-ltc-macos
-    cd /tmp/electrum-ltc-macos
+    mkdir -p /tmp/electrum_silver -macos
+    cd /tmp/electrum_silver -macos
     info "Downloading cdrkit $cdrkit_version"
     wget -nc ${cdrkit_download_path}/${cdrkit_file_name}
     tar xvf ${cdrkit_file_name}
@@ -48,8 +48,8 @@ if ! which ${genisoimage} > /dev/null 2>&1; then
 fi
 
 if ! which dmg > /dev/null 2>&1; then
-    mkdir -p /tmp/electrum-ltc-macos
-    cd /tmp/electrum-ltc-macos
+    mkdir -p /tmp/electrum_silver -macos
+    cd /tmp/electrum_silver -macos
     info "Downloading libdmg"
     LD_PRELOAD= git clone ${libdmg_url}
     cd libdmg-hfsplus
@@ -67,9 +67,9 @@ test -f "$plist" || fail "Info.plist not found"
 VERSION=$(grep -1 ShortVersionString $plist | tail -1 | gawk 'match($0, /<string>(.*)<\/string>/, a) {print a[1]}')
 echo $VERSION
 
-rm -rf /tmp/electrum-ltc-macos/image > /dev/null 2>&1
-mkdir /tmp/electrum-ltc-macos/image/
-cp -r $1 /tmp/electrum-ltc-macos/image/
+rm -rf /tmp/electrum_silver -macos/image > /dev/null 2>&1
+mkdir /tmp/electrum_silver -macos/image/
+cp -r $1 /tmp/electrum_silver -macos/image/
 
 build_dir=$(dirname "$1")
 test -n "$build_dir" -a -d "$build_dir" || exit
@@ -80,16 +80,16 @@ ${genisoimage} \
     -D \
     -l \
     -probe \
-    -V "Electrum-LTC" \
+    -V "electrum_silver " \
     -no-pad \
     -r \
     -dir-mode 0755 \
     -apple \
-    -o Electrum-LTC_uncompressed.dmg \
-    /tmp/electrum-ltc-macos/image || fail "Unable to create uncompressed dmg"
+    -o electrum_silver _uncompressed.dmg \
+    /tmp/electrum_silver -macos/image || fail "Unable to create uncompressed dmg"
 
-dmg dmg Electrum-LTC_uncompressed.dmg electrum-ltc-$VERSION.dmg || fail "Unable to create compressed dmg"
-rm Electrum-LTC_uncompressed.dmg
+dmg dmg electrum_silver _uncompressed.dmg electrum_silver -$VERSION.dmg || fail "Unable to create compressed dmg"
+rm electrum_silver _uncompressed.dmg
 
 echo "Done."
-sha256sum electrum-ltc-$VERSION.dmg
+sha256sum electrum_silver -$VERSION.dmg

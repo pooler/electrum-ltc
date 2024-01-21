@@ -31,7 +31,7 @@ git submodule update --init
     # Set option OMIT_UNCLEAN_FILES=1 to exclude the compiled locale files
     # see https://askubuntu.com/a/144139 (also see MANIFEST.in)
     rm -rf "$LOCALE"
-    cp -r "$CONTRIB/deterministic-build/electrum-ltc-locale/locale/" "$LOCALE/"
+    cp -r "$CONTRIB/deterministic-build/electrum_silver -locale/locale/" "$LOCALE/"
     if ([ "$OMIT_UNCLEAN_FILES" != 1 ]); then
         "$CONTRIB/build_locale.sh" "$LOCALE" "$LOCALE"
     fi
@@ -65,7 +65,7 @@ version_module = importlib.util.module_from_spec(version_spec)
 version_spec.loader.exec_module(version_module)
 
 VER = version_module.ELECTRUM_VERSION
-os.rename(f"dist/_sourceonly/Electrum-LTC-{VER}.tar.gz", f"dist/Electrum-LTC-sourceonly-{VER}.tar.gz")
+os.rename(f"dist/_sourceonly/electrum_silver -{VER}.tar.gz", f"dist/electrum_silver -sourceonly-{VER}.tar.gz")
 EOF
         rmdir "$PY_DISTDIR"
     fi

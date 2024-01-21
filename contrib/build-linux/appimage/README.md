@@ -1,4 +1,4 @@
-AppImage binary for Electrum-LTC
+AppImage binary for electrum_silver 
 ================================
 
 ✓ _This binary should be reproducible, meaning you should be able to generate

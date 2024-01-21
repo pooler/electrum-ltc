@@ -25,7 +25,7 @@ Builder.load_string('''
 
 <PasswordDialog@Popup>
     id: popup
-    title: 'Electrum-LTC'
+    title: 'electrum_silver '
     message: ''
     basename:''
     is_change: False
@@ -109,7 +109,7 @@ Builder.load_string('''
 
 <PincodeDialog@Popup>
     id: popup
-    title: 'Electrum-LTC'
+    title: 'electrum_silver '
     message: ''
     basename:''
     BoxLayout:
@@ -188,7 +188,7 @@ class AbstractPasswordDialog(Factory.Popup):
         self.is_change = is_change
         self.pw = None
         self.new_password = None
-        self.title = 'Electrum-LTC'
+        self.title = 'electrum_silver '
         self.level = 1 if is_change and not has_password else 0
         self.basename = basename
         self.update_screen()

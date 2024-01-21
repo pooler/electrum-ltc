@@ -158,7 +158,7 @@ Dialog {
         rowSpacing: 0
 
         Image {
-            source: "../../../icons/electrum-ltc.png"
+            source: "../../../icons/electrum_silver .png"
             Layout.preferredWidth: constants.iconSizeXLarge
             Layout.preferredHeight: constants.iconSizeXLarge
             Layout.leftMargin: constants.paddingMedium
