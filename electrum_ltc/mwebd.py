@@ -24,29 +24,19 @@ def set_data_dir(dir):
         data_dir = Path(dir) / 'mweb'
         data_dir.mkdir(exist_ok=True)
 
-def find_free_port():
-    global port
-    with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
-        s.bind(('127.0.0.1', 0))
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        port = s.getsockname()[1]
-
 def start_if_needed():
-    with lock: _start_if_needed()
-
-def _start_if_needed():
-    global process
-    if process is None:
-        find_free_port()
-        bin = Path(__file__).parent.parent.resolve() / 'mwebd'
-        network = constants.net.NET_NAME
-        args = [bin, '-c', network, '-d', data_dir, '-l', port]
-        args = list(map(str, args))
-        process = subprocess.Popen(args, stdout=subprocess.DEVNULL)
-
+    global port, process
+    with lock:
+        if process: return
+        with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
+            s.bind(('127.0.0.1', 0))
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            port = s.getsockname()[1]
+        process = subprocess.Popen([Path(__file__).parent.parent.resolve() / 'mwebd',
+            '-c', constants.net.NET_NAME, '-d', data_dir, '-l', f'127.0.0.1:{port}'])
         while True:
             try:
-                RpcStub(grpc.insecure_channel(f'127.0.0.1:{port}')).Status(StatusRequest())
+                stub().Status(StatusRequest())
                 break
             except: ()
 
